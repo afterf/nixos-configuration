@@ -92,12 +92,15 @@
 dotnet-aspnetcore
 dotnet-sdk
 zsh
-sublime
+sublime4
     #  thunderbird
     ];
   };
 nixpkgs.config.allowUnfree = true;
-  # Install firefox.
+nixpkgs.config.permittedInsecurePackages = [
+  "openssl-1.1.1w"   # the rebuild error will tell you the exact version string to use
+];
+# Install firefox.
   programs.firefox.enable = true;
 programs.zsh = {
     enable = true;
@@ -155,3 +158,4 @@ programs.zsh = {
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
+
