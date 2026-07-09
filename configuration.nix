@@ -84,6 +84,7 @@
     isNormalUser = true;
     description = "Aidas";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
 	htop
@@ -91,10 +92,11 @@
 dotnet-aspnetcore
 dotnet-sdk
 zsh
+sublime
     #  thunderbird
     ];
   };
-
+nixpkgs.config.allowUnfree = true;
   # Install firefox.
   programs.firefox.enable = true;
 programs.zsh = {
@@ -114,6 +116,9 @@ programs.zsh = {
     setOptions = [
       "HIST_IGNORE_ALL_DUPS"
     ];
+  };
+  programs.neovim = {
+	defaultEditor = true;
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
