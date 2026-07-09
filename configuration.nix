@@ -87,13 +87,15 @@
     shell = pkgs.zsh;
     packages = with pkgs; [
       kdePackages.kate
-	htop
-	neovim
+        htop
+        neovim
 dotnet-aspnetcore
 dotnet-sdk
 zsh
 sublime4
-    #  thunderbird
+steam
+steamcmd
+#  thunderbird
     ];
   };
 nixpkgs.config.allowUnfree = true;
@@ -121,7 +123,11 @@ programs.zsh = {
     ];
   };
   programs.neovim = {
-	defaultEditor = true;
+    enable = true;
+        defaultEditor = true;
+  };
+  programs.steam = {
+        enable = true;
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -158,4 +164,3 @@ programs.zsh = {
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
-
