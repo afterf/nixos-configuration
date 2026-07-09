@@ -1,3 +1,3 @@
 # nixos-configuration
 
-My **default** configuration.nix file
+My **default** configuration.nix file located /etc/nixos/
