@@ -7,11 +7,9 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
-
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -83,19 +81,10 @@
   users.users."nix" = {
     isNormalUser = true;
     description = "Aidas";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel"];
     shell = pkgs.zsh;
     packages = with pkgs; [
-      kdePackages.kate
-        htop
-        neovim
-dotnet-aspnetcore
-dotnet-sdk
-zsh
-sublime4
-steam
-steamcmd
-#  thunderbird
+	kdePackages.kate
     ];
   };
 nixpkgs.config.allowUnfree = true;
@@ -104,7 +93,7 @@ nixpkgs.config.permittedInsecurePackages = [
 ];
 # Install firefox.
   programs.firefox.enable = true;
-programs.zsh = {
+  programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
@@ -124,17 +113,32 @@ programs.zsh = {
   };
   programs.neovim = {
     enable = true;
-        defaultEditor = true;
+	defaultEditor = true;
   };
   programs.steam = {
-        enable = true;
+	enable = true;
+	dedicatedServer.openFirewall = true;
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+  wget
+  openjdk
+  steam
+  steamcmd
+  sublime4
+  htop
+  zsh
+  virtualbox
+  neovim
+  discord
+  kalker
+  lmstudio
   ];
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "nix" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -164,3 +168,4 @@ programs.zsh = {
   system.stateVersion = "26.05"; # Did you read the comment?
 
 }
+
