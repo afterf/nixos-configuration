@@ -91,30 +91,31 @@ nixpkgs.config.allowUnfree = true;
 nixpkgs.config.permittedInsecurePackages = [
   "openssl-1.1.1w"   # the rebuild error will tell you the exact version string to use
 ];
+# Install git
+  programs.git.enable = true;
+
 # Install firefox.
   programs.firefox.enable = true;
+
+# Install zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
     autosuggestions.enable = true;
     syntaxHighlighting.enable = true;
-
     shellAliases = {
       ll = "ls -l";
       edit = "sudo -e";
       update = "sudo nixos-rebuild switch";
     };
 
-    histSize = 10000;
     histFile = "$HOME/.zsh_history";
     setOptions = [
       "HIST_IGNORE_ALL_DUPS"
     ];
   };
-  programs.neovim = {
-    enable = true;
-	defaultEditor = true;
-  };
+
+  # Install steam
   programs.steam = {
 	enable = true;
 	dedicatedServer.openFirewall = true;
@@ -129,17 +130,20 @@ nixpkgs.config.permittedInsecurePackages = [
   steamcmd
   sublime4
   htop
+  qemu_kvm
   zsh
-  virtualbox
   neovim
   discord
   kalker
   lmstudio
-  ];
-
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "nix" ];
-
+  tor
+  neovim
+];
+  # Install libvirtd 
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
+  virtualisation.spiceUSBRedirection.enable = true;
+  users.groups.libvirtd.members = [ "nix" ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
