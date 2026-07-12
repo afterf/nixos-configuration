@@ -91,13 +91,16 @@ nixpkgs.config.allowUnfree = true;
 nixpkgs.config.permittedInsecurePackages = [
   "openssl-1.1.1w"   # the rebuild error will tell you the exact version string to use
 ];
-# Install git
+# Install VSCode
+  programs.vscode.enable = true;
+
+# Install Git
   programs.git.enable = true;
 
-# Install firefox.
+# Install Firefox.
   programs.firefox.enable = true;
 
-# Install zsh
+# Install Zsh
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -115,7 +118,7 @@ nixpkgs.config.permittedInsecurePackages = [
     ];
   };
 
-  # Install steam
+  # Install Steam
   programs.steam = {
 	enable = true;
 	dedicatedServer.openFirewall = true;
@@ -124,6 +127,7 @@ nixpkgs.config.permittedInsecurePackages = [
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  obsidian
   wget
   openjdk
   steam
@@ -132,17 +136,25 @@ nixpkgs.config.permittedInsecurePackages = [
   htop
   qemu_kvm
   zsh
-  neovim
   discord
-  kalker
   lmstudio
-  tor
   neovim
+  mesa-demos
+  inxi
+  gcc
+  tree-sitter
+  busybox
 ];
   # Install libvirtd 
   virtualisation.libvirtd.enable = true;
+  
+  # Enable swtpm (TPM 2.0)
+  virtualisation.libvirtd.qemu.swtpm.enable = true;
+
+  # On host shutdown make sure guest OS are safely shutdown
+  virtualisation.libvirtd.onShutdown = "suspend";
+   
   programs.virt-manager.enable = true;
-  virtualisation.spiceUSBRedirection.enable = true;
   users.groups.libvirtd.members = [ "nix" ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
