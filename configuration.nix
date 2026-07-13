@@ -10,6 +10,12 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelParams = [ "amd_iommu=on" ];
+  boot.kernelModules = [ "vfio_pci" "vfio" "vfio_iommu_type1" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
+  boot.extraModprobeConfig = ''
+  options vfio-pci ids=10de:1c82,10de:0fb9
+'';
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -51,7 +57,9 @@
     layout = "gb";
     variant = "";
   };
-
+  # Upgrade Nix OS
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
   # Configure console keymap
   console.keyMap = "uk";
 
