@@ -99,6 +99,11 @@ nixpkgs.config.allowUnfree = true;
 nixpkgs.config.permittedInsecurePackages = [
   "openssl-1.1.1w"   # the rebuild error will tell you the exact version string to use
 ];
+# Install Thunderbird
+  programs.thunderbird.enable = true;
+# Install OBS
+  programs.obs-studio.enable = true;
+
 # Install VSCode
   programs.vscode.enable = true;
 
@@ -135,15 +140,18 @@ nixpkgs.config.permittedInsecurePackages = [
   # $ nix search wget
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+  chessx
   obsidian
   wget
   openjdk
   steam
   steamcmd
+  lm_sensors
   sublime4
   htop
   qemu_kvm
   zsh
+  fastfetch
   discord
   lmstudio
   neovim
