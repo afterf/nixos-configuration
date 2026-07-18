@@ -147,7 +147,6 @@ nixpkgs.config.permittedInsecurePackages = [
   wget
   openjdk
   steam
-  clac
   gparted
   steamcmd
   lm_sensors
